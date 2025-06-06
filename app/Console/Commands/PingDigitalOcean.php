@@ -38,6 +38,6 @@ class PingDigitalOcean extends Command
 
     private function pingDigitalOcean()
     {
-        return Http::timeout(5)->get('https://calvin-app-platform-test-sco5k.ondigitalocean.app/api/random-data');
+        return Http::timeout(5)->get('https://monkfish-app-uz4l4.ondigitalocean.app/api/random-data');
     }
 }
