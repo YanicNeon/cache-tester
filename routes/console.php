@@ -15,5 +15,7 @@ use Illuminate\Support\Facades\Schedule;
 
 // Generate Redis traffic every minute
 // Default: 5MB write, 1MB read
-Schedule::command('redis:generate-traffic --kb-write=5000 --kb-read=1000')
-    ->everyMinute();
+// Schedule::command('redis:generate-traffic --kb-write=5000 --kb-read=1000')
+//     ->everyMinute();
+Schedule::command('app:ping-digital-ocean 25')
+    ->everyMinute(); // Ping Digital Ocean every minute
