@@ -217,12 +217,11 @@ class BenchmarkDatabase extends Command
             'driver' => $this->dbDriver,
             'records' => $findCount,
             'iterations' => $iterations,
-            'avg_time' => round($avgTime, 4),
-            'avg_per_record' => round($avgTime / $findCount, 4),
+            'avg_time' => round($avgTime, 6),
+            'avg_per_record' => round($avgTime / $findCount, 6),
         ];
 
         Log::info("Benchmark [{$this->dbDriver}]: Find by ID", $this->results['find']);
-        Log::info("Benchmark [{$this->dbDriver}]: Find by ID detailed", $times);
     }
 
     /**
