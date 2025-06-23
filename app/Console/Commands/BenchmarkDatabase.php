@@ -57,12 +57,12 @@ class BenchmarkDatabase extends Command
         $this->info("Cleaned up previous benchmark data");
 
         // Run the benchmark operations
-        $this->benchmarkInsert($records, $iterations);
-        $this->benchmarkBulkInsert($records, $iterations, $chunkSize);
+        // $this->benchmarkInsert($records, $iterations);
+        // $this->benchmarkBulkInsert($records, $iterations, $chunkSize);
         $this->benchmarkFind($iterations);
-        $this->benchmarkQuery($iterations);
-        $this->benchmarkUpdate($iterations);
-        $this->benchmarkDelete($iterations);
+        // $this->benchmarkQuery($iterations);
+        // $this->benchmarkUpdate($iterations);
+        // $this->benchmarkDelete($iterations);
 
         // Display the results as a table
         $this->displayResults();
@@ -222,6 +222,7 @@ class BenchmarkDatabase extends Command
         ];
 
         Log::info("Benchmark [{$this->dbDriver}]: Find by ID", $this->results['find']);
+        Log::info("Benchmark [{$this->dbDriver}]: Find by ID detailed", $times);
     }
 
     /**
