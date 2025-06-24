@@ -78,22 +78,19 @@ class PingDatabase extends Command
 
         $durationNs = $endTime - $startTime;
         $durationMs = $durationNs / 1_000_000; // Convert nanoseconds to milliseconds
-        $durationUs = $durationNs / 1_000; // Convert nanoseconds to microseconds
 
         $coldStartResult = [
             'duration_ns' => $durationNs,
             'duration_ms' => round($durationMs, 3),
-            'duration_us' => round($durationUs, 1),
             'result' => $result[0]->result ?? null,
         ];
 
-        $this->info("Cold start query completed in {$coldStartResult['duration_ms']} ms ({$coldStartResult['duration_us']} μs)");
+        $this->info("Cold start query completed in {$coldStartResult['duration_ms']} ms");
 
         Log::info("Benchmark [{$this->dbDriver}]: Cold Start Query", [
             'driver' => $this->dbDriver,
             'connection' => $this->connectionName,
             'duration_ms' => $coldStartResult['duration_ms'],
-            'duration_us' => $coldStartResult['duration_us'],
         ]);
 
         return $coldStartResult;
@@ -140,23 +137,17 @@ class PingDatabase extends Command
             'query_count' => $queryCount,
             'total_duration_ms' => round($totalDurationNs / 1_000_000, 3),
             'avg_duration_ms' => round($avgDurationNs / 1_000_000, 3),
-            'avg_duration_us' => round($avgDurationNs / 1_000, 1),
             'min_duration_ms' => round($minDurationNs / 1_000_000, 3),
-            'min_duration_us' => round($minDurationNs / 1_000, 1),
             'max_duration_ms' => round($maxDurationNs / 1_000_000, 3),
-            'max_duration_us' => round($maxDurationNs / 1_000, 1),
             'p50_duration_ms' => round($p50DurationNs / 1_000_000, 3),
-            'p50_duration_us' => round($p50DurationNs / 1_000, 1),
             'p95_duration_ms' => round($p95DurationNs / 1_000_000, 3),
-            'p95_duration_us' => round($p95DurationNs / 1_000, 1),
             'p99_duration_ms' => round($p99DurationNs / 1_000_000, 3),
-            'p99_duration_us' => round($p99DurationNs / 1_000, 1),
             'queries_per_second' => round($queryCount / ($totalDurationNs / 1_000_000_000), 1),
         ];
 
         $this->info("Batch queries completed:");
         $this->info("  Total time: {$batchResults['total_duration_ms']} ms");
-        $this->info("  Average: {$batchResults['avg_duration_ms']} ms ({$batchResults['avg_duration_us']} μs)");
+        $this->info("  Average: {$batchResults['avg_duration_ms']} ms");
         $this->info("  Queries per second: {$batchResults['queries_per_second']}");
 
         Log::info("Benchmark [{$this->dbDriver}]: Batch Queries", [
@@ -165,7 +156,6 @@ class PingDatabase extends Command
             'query_count' => $queryCount,
             'total_duration_ms' => $batchResults['total_duration_ms'],
             'avg_duration_ms' => $batchResults['avg_duration_ms'],
-            'avg_duration_us' => $batchResults['avg_duration_us'],
             'min_duration_ms' => $batchResults['min_duration_ms'],
             'max_duration_ms' => $batchResults['max_duration_ms'],
             'p50_duration_ms' => $batchResults['p50_duration_ms'],
