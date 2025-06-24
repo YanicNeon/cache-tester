@@ -80,7 +80,6 @@ class PingDatabase extends Command
         $durationMs = $durationNs / 1_000_000; // Convert nanoseconds to milliseconds
 
         $coldStartResult = [
-            'duration_ns' => $durationNs,
             'duration_ms' => round($durationMs, 3),
             'result' => $result[0]->result ?? null,
         ];
@@ -216,7 +215,6 @@ class PingDatabase extends Command
         $this->info("\n🔸 COLD START QUERY (SELECT 1)");
         $coldStartTable = [
             ['Duration (ms)', $coldStart['duration_ms']],
-            ['Duration (μs)', $coldStart['duration_us']],
             ['Result', $coldStart['result']],
         ];
         $this->table(['Metric', 'Value'], $coldStartTable);
@@ -226,17 +224,11 @@ class PingDatabase extends Command
         $batchTable = [
             ['Total Duration (ms)', $batch['total_duration_ms']],
             ['Average (ms)', $batch['avg_duration_ms']],
-            ['Average (μs)', $batch['avg_duration_us']],
             ['Minimum (ms)', $batch['min_duration_ms']],
-            ['Minimum (μs)', $batch['min_duration_us']],
             ['Maximum (ms)', $batch['max_duration_ms']],
-            ['Maximum (μs)', $batch['max_duration_us']],
             ['50th Percentile (ms)', $batch['p50_duration_ms']],
-            ['50th Percentile (μs)', $batch['p50_duration_us']],
             ['95th Percentile (ms)', $batch['p95_duration_ms']],
-            ['95th Percentile (μs)', $batch['p95_duration_us']],
             ['99th Percentile (ms)', $batch['p99_duration_ms']],
-            ['99th Percentile (μs)', $batch['p99_duration_us']],
             ['Queries per Second', $batch['queries_per_second']],
         ];
         $this->table(['Metric', 'Value'], $batchTable);
