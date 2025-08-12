@@ -10,4 +10,6 @@ Route::get('/login', function() {
     return view('welcome');
 });
 
-
+Route::get('/', function('login') {
+    return view('welcome');
+});
